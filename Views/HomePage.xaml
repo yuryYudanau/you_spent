@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
              x:Class="YouSpent.Views.HomePage"
-             Title="Главная">
+             Title="{x:Static resources:HomePageResources.PageTitle}">
     
     <VerticalStackLayout
         Padding="30"
@@ -11,13 +12,13 @@
         HorizontalOptions="Center">
         
         <Label 
-            Text="Главная страница"
+            Text="{x:Static resources:HomePageResources.PageHeading}"
             FontSize="24"
             FontAttributes="Bold"
             HorizontalOptions="Center" />
         
         <Label 
-            Text="Здесь будут отображаться основные показатели"
+            Text="{x:Static resources:HomePageResources.PageDescription}"
             FontSize="16"
             HorizontalOptions="Center" />
         
