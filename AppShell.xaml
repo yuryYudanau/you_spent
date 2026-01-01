@@ -3,12 +3,27 @@
     x:Class="YouSpent.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:YouSpent"
+    xmlns:views="clr-namespace:YouSpent.Views"
     Title="YouSpent">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Главная"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate views:HomePage}"
+            Route="HomePage" />
+
+        <ShellContent
+            Title="Расходы"
+            Icon="plus.png"
+            ContentTemplate="{DataTemplate views:AddExpensePage}"
+            Route="AddExpensePage" />
+
+        <ShellContent
+            Title="Желаемое"
+            Icon="list.png"
+            ContentTemplate="{DataTemplate views:WishlistPage}"
+            Route="WishlistPage" />
+    </TabBar>
 
 </Shell>
