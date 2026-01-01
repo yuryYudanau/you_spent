@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
              x:Class="YouSpent.Views.WishlistPage"
-             Title="Желаемое">
+             Title="{x:Static resources:WishlistPageResources.PageTitle}">
     
     <VerticalStackLayout
         Padding="30"
@@ -11,13 +12,13 @@
         HorizontalOptions="Center">
         
         <Label 
-            Text="Список желаемых покупок"
+            Text="{x:Static resources:WishlistPageResources.PageHeading}"
             FontSize="24"
             FontAttributes="Bold"
             HorizontalOptions="Center" />
         
         <Label 
-            Text="Здесь будет список желаемых покупок-накоплений"
+            Text="{x:Static resources:WishlistPageResources.PageDescription}"
             FontSize="16"
             HorizontalOptions="Center" />
         

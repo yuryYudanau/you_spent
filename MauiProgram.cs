@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using YouSpent.Data;
+using YouSpent.Services;
 
 namespace YouSpent
 {
@@ -30,6 +31,9 @@ namespace YouSpent
 
             // Register services
             builder.Services.AddScoped<ExpenseService>();
+            
+            // Register localization service
+            builder.Services.AddSingleton<LocalizationService>();
 
             // Register database service
             builder.Services.AddSingleton<DatabaseService>();
@@ -39,6 +43,10 @@ namespace YouSpent
 #endif
 
             var app = builder.Build();
+
+            // Initialize localization
+            var localizationService = app.Services.GetRequiredService<LocalizationService>();
+            localizationService.SetDeviceLanguage();
 
             // Initialize database
             Task.Run(async () =>

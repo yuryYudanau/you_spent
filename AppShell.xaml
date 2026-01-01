@@ -4,23 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:YouSpent.Views"
-    Title="YouSpent">
+    xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
+    Title="{x:Static resources:AppResources.AppTitle}">
 
     <TabBar>
         <ShellContent
-            Title="Главная"
+            Title="{x:Static resources:AppResources.TabHome}"
             Icon="home.png"
             ContentTemplate="{DataTemplate views:HomePage}"
             Route="HomePage" />
 
         <ShellContent
-            Title="Расходы"
+            Title="{x:Static resources:AppResources.TabExpenses}"
             Icon="plus.png"
             ContentTemplate="{DataTemplate views:AddExpensePage}"
             Route="AddExpensePage" />
 
         <ShellContent
-            Title="Желаемое"
+            Title="{x:Static resources:AppResources.TabWishlist}"
             Icon="list.png"
             ContentTemplate="{DataTemplate views:WishlistPage}"
             Route="WishlistPage" />
