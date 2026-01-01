@@ -10,5 +10,8 @@ namespace YouSpent.Models
         public List<Day> Days { get; set; } = new List<Day>();
         
         public decimal TotalSpent => Days.Sum(d => d.TotalSpent);
+        
+        // Foreign key
+        public int? MonthId { get; set; }
     }
 }

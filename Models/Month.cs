@@ -10,5 +10,8 @@ namespace YouSpent.Models
         
         public decimal TotalSpent => Days.Sum(d => d.TotalSpent);
         public string MonthName => new DateTime(Year, MonthNumber, 1).ToString("MMMM");
+        
+        // Foreign key
+        public int? YearId { get; set; }
     }
 }
