@@ -7,5 +7,8 @@ namespace YouSpent.Models
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public string Category { get; set; } = string.Empty;
+        
+        // Foreign key for Day relationship
+        public int? DayId { get; set; }
     }
 }

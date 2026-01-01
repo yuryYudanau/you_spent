@@ -9,5 +9,9 @@ namespace YouSpent.Models
         public decimal TotalSpent => Expenses.Sum(e => e.Amount);
         public string DayOfWeek => Date.DayOfWeek.ToString();
         public int DayNumber => Date.Day;
+        
+        // Foreign keys
+        public int? WeekId { get; set; }
+        public int? MonthId { get; set; }
     }
 }
