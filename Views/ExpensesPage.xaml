@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
+             x:Class="YouSpent.Views.ExpensesPage"
+             Title="{x:Static resources:ExpensesPageResources.PageTitle}">
+    
+    <Grid Padding="20" RowDefinitions="Auto,*">
+        
+        <!-- Date Selector at the top -->
+        <VerticalStackLayout Grid.Row="0" Spacing="15">
+            
+            <!-- Year Selector -->
+            <Grid ColumnDefinitions="60,*,60"
+                  HorizontalOptions="Center">
+                
+                <!-- Previous Year Button -->
+                <Border Grid.Column="0"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HeightRequest="44"
+                        WidthRequest="44"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPreviousYearClicked"/>
+                    </Border.GestureRecognizers>
+                    <Path Data="M15,6 L9,12 L15,18"
+                          Stroke="{StaticResource Gray600}"
+                          StrokeThickness="2.5"
+                          StrokeLineCap="Round"
+                          StrokeLineJoin="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="24"
+                          HeightRequest="24"/>
+                </Border>
+                
+                <!-- Year Oval -->
+                <Border Grid.Column="1"
+                        StrokeThickness="0"
+                        x:Name="YearBorder"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        WidthRequest="200">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30"/>
+                    </Border.StrokeShape>
+                    
+                    <!-- Year Label -->
+                    <Label x:Name="YearLabel"
+                           Text="2025"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+                
+                <!-- Next Year Button -->
+                <Border Grid.Column="2"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HeightRequest="44"
+                        WidthRequest="44"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNextYearClicked"/>
+                    </Border.GestureRecognizers>
+                    <Path Data="M9,6 L15,12 L9,18"
+                          Stroke="{StaticResource Gray600}"
+                          StrokeThickness="2.5"
+                          StrokeLineCap="Round"
+                          StrokeLineJoin="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="24"
+                          HeightRequest="24"/>
+                </Border>
+            </Grid>
+            
+            <!-- Month Selector -->
+            <Grid ColumnDefinitions="50,*,50"
+                  HorizontalOptions="Center">
+                
+                <!-- Previous Month Button -->
+                <Border Grid.Column="0"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HeightRequest="36"
+                        WidthRequest="36"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPreviousMonthClicked"/>
+                    </Border.GestureRecognizers>
+                    <Path Data="M13,6 L9,10 L13,14"
+                          Stroke="{StaticResource Gray600}"
+                          StrokeThickness="2"
+                          StrokeLineCap="Round"
+                          StrokeLineJoin="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="20"
+                          HeightRequest="20"/>
+                </Border>
+                
+                <!-- Month Oval -->
+                <Border Grid.Column="1"
+                        StrokeThickness="0"
+                        x:Name="MonthBorder"
+                        HeightRequest="45"
+                        HorizontalOptions="Center"
+                        WidthRequest="160">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22.5"/>
+                    </Border.StrokeShape>
+                    
+                    <!-- Month Label -->
+                    <Label x:Name="MonthLabel"
+                           Text="??????"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+                
+                <!-- Next Month Button -->
+                <Border Grid.Column="2"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HeightRequest="36"
+                        WidthRequest="36"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNextMonthClicked"/>
+                    </Border.GestureRecognizers>
+                    <Path Data="M9,6 L13,10 L9,14"
+                          Stroke="{StaticResource Gray600}"
+                          StrokeThickness="2"
+                          StrokeLineCap="Round"
+                          StrokeLineJoin="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="20"
+                          HeightRequest="20"/>
+                </Border>
+            </Grid>
+            
+        </VerticalStackLayout>
+        
+        <!-- Content Area for expenses data -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="10">
+                <Label Text="{x:Static resources:ExpensesPageResources.PageDescription}"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,0"/>
+                
+                <!-- Placeholder for future expenses data -->
+                <Label x:Name="SelectedYearInfo"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalOptions="Center"
+                       Margin="0,10,0,0"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        
+    </Grid>
+    
+</ContentPage>

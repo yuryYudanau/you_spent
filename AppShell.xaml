@@ -17,8 +17,8 @@
         <ShellContent
             Title="{x:Static resources:AppResources.TabExpenses}"
             Icon="plus.png"
-            ContentTemplate="{DataTemplate views:AddExpensePage}"
-            Route="AddExpensePage" />
+            ContentTemplate="{DataTemplate views:ExpensesPage}"
+            Route="ExpensesPage" />
 
         <ShellContent
             Title="{x:Static resources:AppResources.TabWishlist}"

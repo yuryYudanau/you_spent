@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using YouSpent.Data;
 using YouSpent.Services;
+using YouSpent.Views;
+using YouSpent.ViewModels;
 
 namespace YouSpent
 {
@@ -37,6 +39,12 @@ namespace YouSpent
 
             // Register database service
             builder.Services.AddSingleton<DatabaseService>();
+
+            // Register ViewModels
+            builder.Services.AddTransient<ExpensesPageViewModel>();
+
+            // Register Pages
+            builder.Services.AddTransient<ExpensesPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
