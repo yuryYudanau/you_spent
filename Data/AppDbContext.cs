@@ -10,6 +10,7 @@ namespace YouSpent.Data
         public DbSet<Week> Weeks { get; set; }
         public DbSet<Month> Months { get; set; }
         public DbSet<Year> Years { get; set; }
+        public DbSet<ExpenseType> ExpenseTypes { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -27,6 +28,21 @@ namespace YouSpent.Data
                 entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
                 entity.Property(e => e.Category).HasMaxLength(100);
                 entity.Property(e => e.Date).IsRequired();
+                
+                // Relationship with ExpenseType
+                entity.HasOne(e => e.ExpenseType)
+                      .WithMany()
+                      .HasForeignKey(e => e.ExpenseTypeId)
+                      .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            // Configure ExpenseType
+            modelBuilder.Entity<ExpenseType>(entity =>
+            {
+                entity.HasKey(et => et.Id);
+                entity.Property(et => et.Name).IsRequired().HasMaxLength(100);
+                entity.Property(et => et.IsActive).IsRequired();
+                entity.Property(et => et.CreatedAt).IsRequired();
             });
 
             // Configure Day

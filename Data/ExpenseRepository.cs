@@ -14,12 +14,17 @@ namespace YouSpent.Data
 
         public async Task<Expense?> GetByIdAsync(int id)
         {
-            return await _context.Expenses.FindAsync(id);
+            return await _context.Expenses
+                .Include(e => e.ExpenseType)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<IEnumerable<Expense>> GetAllAsync()
         {
-            return await _context.Expenses.ToListAsync();
+            return await _context.Expenses
+                .Include(e => e.ExpenseType)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Expense> AddAsync(Expense entity)
@@ -57,15 +62,19 @@ namespace YouSpent.Data
         public async Task<IEnumerable<Expense>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
             return await _context.Expenses
+                .Include(e => e.ExpenseType)
                 .Where(e => e.Date >= startDate && e.Date <= endDate)
-                .OrderBy(e => e.Date)
+                .AsNoTracking()
+                .OrderByDescending(e => e.Date)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Expense>> GetExpensesByCategoryAsync(string category)
         {
             return await _context.Expenses
+                .Include(e => e.ExpenseType)
                 .Where(e => e.Category == category)
+                .AsNoTracking()
                 .OrderByDescending(e => e.Date)
                 .ToListAsync();
         }
@@ -76,8 +85,20 @@ namespace YouSpent.Data
             var endOfDay = startOfDay.AddDays(1);
 
             return await _context.Expenses
+                .Include(e => e.ExpenseType)
                 .Where(e => e.Date >= startOfDay && e.Date < endOfDay)
+                .AsNoTracking()
                 .OrderBy(e => e.Date)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Expense>> GetExpensesByTypeIdAsync(int expenseTypeId, DateTime startDate, DateTime endDate)
+        {
+            return await _context.Expenses
+                .Include(e => e.ExpenseType)
+                .Where(e => e.ExpenseTypeId == expenseTypeId && e.Date >= startDate && e.Date <= endDate)
+                .AsNoTracking()
+                .OrderByDescending(e => e.Date)
                 .ToListAsync();
         }
 

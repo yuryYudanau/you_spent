@@ -4,6 +4,13 @@
              xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
              x:Class="YouSpent.Views.ExpensesPage"
              Title="{x:Static resources:ExpensesPageResources.PageTitle}">
+
+    <ContentPage.Resources>
+        <!-- Converter for formatting date -->
+        <ResourceDictionary>
+            <!-- We'll add converters in code-behind -->
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <Grid Padding="20" RowDefinitions="Auto,*">
         
@@ -128,7 +135,7 @@
                     
                     <!-- Month Label -->
                     <Label x:Name="MonthLabel"
-                           Text="??????"
+                           Text="январь"
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="White"
@@ -164,20 +171,162 @@
             
         </VerticalStackLayout>
         
-        <!-- Content Area for expenses data -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="10">
-                <Label Text="{x:Static resources:ExpensesPageResources.PageDescription}"
-                       FontSize="16"
-                       HorizontalOptions="Center"
-                       Margin="0,20,0,0"/>
+        <!-- Expense Types Groups -->
+        <ScrollView Grid.Row="1" Margin="0,20,0,0">
+            <VerticalStackLayout Spacing="15" Padding="0,0,10,0">
                 
-                <!-- Placeholder for future expenses data -->
-                <Label x:Name="SelectedYearInfo"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray500}"
-                       HorizontalOptions="Center"
-                       Margin="0,10,0,0"/>
+                <!-- Debug Info with Navigation -->
+                <VerticalStackLayout x:Name="DebugContainer" Spacing="10">
+                    <Label x:Name="DebugLabel"
+                           Text="{x:Static resources:ExpensesPageResources.Loading}"
+                           FontSize="14"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,10"/>
+                    
+                    <!-- Button to navigate to settings -->
+                    <Border x:Name="GoToSettingsButton"
+                            StrokeThickness="0"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                            HeightRequest="40"
+                            WidthRequest="220"
+                            HorizontalOptions="Center"
+                            IsVisible="False">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGoToSettingsClicked"/>
+                        </Border.GestureRecognizers>
+                        
+                        <Label Text="{x:Static resources:ExpensesPageResources.GoToSettings}"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </VerticalStackLayout>
+                
+                <!-- Expense Types Collection -->
+                <CollectionView x:Name="ExpenseTypesCollection"
+                                ItemsSource="{Binding ExpenseTypeGroups}">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Padding="20" Spacing="10">
+                            <Label Text="{x:Static resources:ExpensesPageResources.ExpenseTypesNotFound}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                            <Label Text="{x:Static resources:ExpensesPageResources.AddExpenseTypesInSettingsHint}"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!-- Expense Type Group -->
+                            <Grid Margin="0,0,0,15">
+                                <Border StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                                        BackgroundColor="Transparent"
+                                        Margin="0,8,0,0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="8"/>
+                                    </Border.StrokeShape>
+                                    
+                                    <Grid Padding="10,12,10,10" ColumnDefinitions="*,Auto">
+                                        
+                                        <!-- Expenses as Tags (FlexLayout) -->
+                                        <FlexLayout Grid.Column="0"
+                                                    Wrap="Wrap"
+                                                    JustifyContent="Start"
+                                                    AlignItems="Start"
+                                                    VerticalOptions="Center"
+                                                    BindableLayout.ItemsSource="{Binding Expenses}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <!-- Expense Tag -->
+                                                    <Border StrokeThickness="0"
+                                                            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                                            Padding="10,5"
+                                                            Margin="0,0,6,6">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="14"/>
+                                                        </Border.StrokeShape>
+                                                        <Border.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="OnExpenseTagTapped" CommandParameter="{Binding .}"/>
+                                                        </Border.GestureRecognizers>
+                                                        
+                                                        <Label FontSize="12"
+                                                               TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Amount, StringFormat='{0:N0}'}" FontAttributes="Bold"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </FlexLayout>
+                                        
+                                        <!-- Empty State -->
+                                        <Label Grid.Column="0"
+                                               Text="{x:Static resources:ExpensesPageResources.NoExpenses}"
+                                               FontSize="11"
+                                               TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Center"
+                                               Margin="0,0,0,0"
+                                               IsVisible="{Binding HasExpenses, Converter={StaticResource InvertedBoolConverter}}"/>
+                                        
+                                        <!-- Add Button (Circular) - Right Center -->
+                                        <Border Grid.Column="1"
+                                                StrokeThickness="0"
+                                                BackgroundColor="#28a745"
+                                                HeightRequest="32"
+                                                WidthRequest="32"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="End"
+                                                Margin="8,0,0,0">
+                                            <Border.StrokeShape>
+                                                <Ellipse />
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnAddExpenseClicked"/>
+                                            </Border.GestureRecognizers>
+                                            
+                                            <Label Text="+"
+                                                   FontSize="22"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Margin="0,-2,0,0"/>
+                                        </Border>
+                                        
+                                    </Grid>
+                                </Border>
+                                
+                                <!-- Label on top of border -->
+                                <Label Text="{Binding ExpenseType.Name}"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                       Padding="8,0"
+                                       VerticalOptions="Start"
+                                       HorizontalOptions="Start"
+                                       Margin="20,0,0,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
             </VerticalStackLayout>
         </ScrollView>
         

@@ -17,9 +17,9 @@ namespace YouSpent.Data
         }
 
         /// <summary>
-        /// Add a new expense and associate it with the corresponding day
+        /// Add a new expense and associate it with the corresponding day and expense type
         /// </summary>
-        public async Task<Expense> AddExpenseAsync(string description, decimal amount, DateTime date, string category)
+        public async Task<Expense> AddExpenseAsync(string description, decimal amount, DateTime date, int? expenseTypeId = null, string? category = null)
         {
             // Create expense
             var expense = new Expense
@@ -27,7 +27,8 @@ namespace YouSpent.Data
                 Description = description,
                 Amount = amount,
                 Date = date,
-                Category = category
+                ExpenseTypeId = expenseTypeId,
+                Category = category ?? string.Empty
             };
 
             // Check if day exists

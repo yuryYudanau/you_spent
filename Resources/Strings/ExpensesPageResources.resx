@@ -70,4 +70,92 @@
   <data name="TabTitle" xml:space="preserve">
     <value>Expenses</value>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="NoExpenseTypes" xml:space="preserve">
+    <value>No active expense types</value>
+  </data>
+  <data name="AddExpenseTypesInSettings" xml:space="preserve">
+    <value>Add them in Settings</value>
+  </data>
+  <data name="GoToSettings" xml:space="preserve">
+    <value>Go to Settings</value>
+  </data>
+  <data name="ExpenseTypesNotFound" xml:space="preserve">
+    <value>Expense types not found</value>
+  </data>
+  <data name="AddExpenseTypesInSettingsHint" xml:space="preserve">
+    <value>Add expense types in settings</value>
+  </data>
+  <data name="NoExpenses" xml:space="preserve">
+    <value>No expenses</value>
+  </data>
+  <data name="AddExpenseTitle" xml:space="preserve">
+    <value>Add Expense</value>
+  </data>
+  <data name="EnterAmountPrompt" xml:space="preserve">
+    <value>Enter amount for '{0}':</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="ExpenseAdded" xml:space="preserve">
+    <value>Expense {0} added</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FailedToAddExpense" xml:space="preserve">
+    <value>Failed to add expense</value>
+  </data>
+  <data name="ExpenseDetails" xml:space="preserve">
+    <value>Expense: {0}
+Date: {1}</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="DeleteExpenseConfirm" xml:space="preserve">
+    <value>Delete expense {0}?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ExpenseDeleted" xml:space="preserve">
+    <value>Expense deleted</value>
+  </data>
+  <data name="FailedToDeleteExpense" xml:space="preserve">
+    <value>Failed to delete expense</value>
+  </data>
+  <data name="NewAmount" xml:space="preserve">
+    <value>New amount:</value>
+  </data>
+  <data name="AmountUpdated" xml:space="preserve">
+    <value>Amount updated</value>
+  </data>
+  <data name="FailedToUpdateExpense" xml:space="preserve">
+    <value>Failed to update expense</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="LoadedTypesCount" xml:space="preserve">
+    <value>Loaded types: {0}</value>
+  </data>
+  <data name="FuturePeriodMessage" xml:space="preserve">
+    <value>Cannot add expenses to the future</value>
+  </data>
 </root>

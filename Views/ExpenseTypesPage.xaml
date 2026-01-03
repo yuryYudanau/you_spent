@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseSettingsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:views="clr-namespace:YouSpent.Views"
+                        x:Class="YouSpent.Views.ExpenseTypesPage"
+                        x:Name="ExpenseTypesPageRoot">
+    
+    <!-- Set the content for this specific settings page -->
+    <views:BaseSettingsPage.PageContent>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Add New Expense Type Section -->
+            <Grid Margin="0,0,0,10">
+                <Border StrokeThickness="1"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        BackgroundColor="Transparent"
+                        Margin="0,8,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8"/>
+                    </Border.StrokeShape>
+                    
+                    <VerticalStackLayout Padding="15,20,15,15" Spacing="15">
+                        <!-- Entry for new type name -->
+                        <Entry x:Name="NewTypeEntry"
+                               Placeholder="Enter expense type name"
+                               Text="{Binding NewTypeName}"
+                               FontSize="14"
+                               Completed="OnAddExpenseTypeClicked" />
+                        
+                        <!-- Add Button -->
+                        <Border StrokeThickness="0"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                HeightRequest="44">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddExpenseTypeClicked"/>
+                            </Border.GestureRecognizers>
+                            
+                            <Label Text="Add Expense Type"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Label on top of border -->
+                <Label Text="Add New Type"
+                       FontSize="12"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                       Padding="5,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Margin="20,0,0,0" />
+            </Grid>
+            
+            <!-- Existing Expense Types List Section -->
+            <Grid>
+                <Border StrokeThickness="1"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        BackgroundColor="Transparent"
+                        Margin="0,8,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8"/>
+                    </Border.StrokeShape>
+                    
+                    <CollectionView x:Name="ExpenseTypesCollection"
+                                    ItemsSource="{Binding ExpenseTypes}"
+                                    Margin="10"
+                                    MinimumHeightRequest="200">
+                        <CollectionView.EmptyView>
+                            <Label Text="No expense types yet. Add one above!"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Margin="20" />
+                        </CollectionView.EmptyView>
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                        Margin="0,5"
+                                        Padding="10">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="6"/>
+                                    </Border.StrokeShape>
+                                    
+                                    <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10">
+                                        <!-- Expense Type Name -->
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Name}"
+                                               FontSize="14"
+                                               VerticalOptions="Center"
+                                               TextColor="{Binding IsActive, Converter={StaticResource BoolToTextColorConverter}}" />
+                                        
+                                        <!-- Toggle Active Button -->
+                                        <Border Grid.Column="1"
+                                                StrokeThickness="0"
+                                                BackgroundColor="{Binding IsActive, Converter={StaticResource BoolToActiveButtonColorConverter}}"
+                                                HeightRequest="36"
+                                                WidthRequest="50"
+                                                VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6"/>
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnToggleActiveClicked" CommandParameter="{Binding .}"/>
+                                            </Border.GestureRecognizers>
+                                            
+                                            <Label Text="{Binding IsActive, Converter={StaticResource BoolToActiveIconConverter}}"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        
+                                        <!-- Edit Button -->
+                                        <Border Grid.Column="2"
+                                                StrokeThickness="0"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"
+                                                HeightRequest="36"
+                                                WidthRequest="36"
+                                                VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6"/>
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnEditClicked" CommandParameter="{Binding .}"/>
+                                            </Border.GestureRecognizers>
+                                            
+                                            <Label Text="✎"
+                                                   FontSize="18"
+                                                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        
+                                        <!-- Delete Button -->
+                                        <Border Grid.Column="3"
+                                                StrokeThickness="0"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource Magenta}}"
+                                                HeightRequest="36"
+                                                WidthRequest="36"
+                                                VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6"/>
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnDeleteClicked" CommandParameter="{Binding .}"/>
+                                            </Border.GestureRecognizers>
+                                            
+                                            <Label Text="🗑"
+                                                   FontSize="18"
+                                                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+                
+                <!-- Label on top of border -->
+                <Label Text="Expense Types"
+                       FontSize="12"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                       Padding="5,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Margin="20,0,0,0" />
+            </Grid>
+            
+        </VerticalStackLayout>
+    </views:BaseSettingsPage.PageContent>
+    
+</views:BaseSettingsPage>
