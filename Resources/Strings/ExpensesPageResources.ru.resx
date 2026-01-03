@@ -24,4 +24,92 @@
   <data name="TabTitle" xml:space="preserve">
     <value>Расходы</value>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="NoExpenseTypes" xml:space="preserve">
+    <value>Нет активных типов расходов</value>
+  </data>
+  <data name="AddExpenseTypesInSettings" xml:space="preserve">
+    <value>Добавьте их в настройках</value>
+  </data>
+  <data name="GoToSettings" xml:space="preserve">
+    <value>Перейти к настройкам</value>
+  </data>
+  <data name="ExpenseTypesNotFound" xml:space="preserve">
+    <value>Типы расходов не найдены</value>
+  </data>
+  <data name="AddExpenseTypesInSettingsHint" xml:space="preserve">
+    <value>Добавьте типы расходов в настройках</value>
+  </data>
+  <data name="NoExpenses" xml:space="preserve">
+    <value>Нет расходов</value>
+  </data>
+  <data name="AddExpenseTitle" xml:space="preserve">
+    <value>Добавить расход</value>
+  </data>
+  <data name="EnterAmountPrompt" xml:space="preserve">
+    <value>Введите сумму для '{0}':</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех</value>
+  </data>
+  <data name="ExpenseAdded" xml:space="preserve">
+    <value>Расход {0} ₽ добавлен</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="FailedToAddExpense" xml:space="preserve">
+    <value>Не удалось добавить расход</value>
+  </data>
+  <data name="ExpenseDetails" xml:space="preserve">
+    <value>Расход: {0} ₽
+Дата: {1}</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Подтверждение</value>
+  </data>
+  <data name="DeleteExpenseConfirm" xml:space="preserve">
+    <value>Удалить расход {0} ₽?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="ExpenseDeleted" xml:space="preserve">
+    <value>Расход удалён</value>
+  </data>
+  <data name="FailedToDeleteExpense" xml:space="preserve">
+    <value>Не удалось удалить расход</value>
+  </data>
+  <data name="NewAmount" xml:space="preserve">
+    <value>Новая сумма:</value>
+  </data>
+  <data name="AmountUpdated" xml:space="preserve">
+    <value>Сумма обновлена</value>
+  </data>
+  <data name="FailedToUpdateExpense" xml:space="preserve">
+    <value>Не удалось обновить расход</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="LoadedTypesCount" xml:space="preserve">
+    <value>Загружено типов: {0}</value>
+  </data>
+  <data name="FuturePeriodMessage" xml:space="preserve">
+    <value>Нельзя добавлять расходы в будущее</value>
+  </data>
 </root>

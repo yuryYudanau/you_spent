@@ -7,6 +7,43 @@
     xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
     Title="{x:Static resources:AppResources.AppTitle}">
 
+    <Shell.TitleView>
+        <Grid Padding="0,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="{x:Static resources:AppResources.AppTitle}"
+                   Grid.Column="0"
+                   VerticalOptions="Center"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            
+            <!-- Settings Button -->
+            <Border Grid.Column="1"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    HeightRequest="44"
+                    WidthRequest="44"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSettingsClicked"/>
+                </Border.GestureRecognizers>
+                
+                <Label Text="☰"
+                       FontSize="24"
+                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+
     <TabBar>
         <ShellContent
             Title="{x:Static resources:AppResources.TabHome}"
@@ -17,8 +54,8 @@
         <ShellContent
             Title="{x:Static resources:AppResources.TabExpenses}"
             Icon="plus.png"
-            ContentTemplate="{DataTemplate views:AddExpensePage}"
-            Route="AddExpensePage" />
+            ContentTemplate="{DataTemplate views:ExpensesPage}"
+            Route="ExpensesPage" />
 
         <ShellContent
             Title="{x:Static resources:AppResources.TabWishlist}"

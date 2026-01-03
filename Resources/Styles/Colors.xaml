@@ -27,6 +27,11 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
+    <!-- Period state colors - neutral and soft -->
+    <Color x:Key="CurrentPeriod">#5E7CE2</Color>
+    <Color x:Key="PastPeriod">#7B8794</Color>
+    <Color x:Key="FuturePeriod">#D1D5DB</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -41,4 +46,8 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <SolidColorBrush x:Key="CurrentPeriodBrush" Color="{StaticResource CurrentPeriod}"/>
+    <SolidColorBrush x:Key="PastPeriodBrush" Color="{StaticResource PastPeriod}"/>
+    <SolidColorBrush x:Key="FuturePeriodBrush" Color="{StaticResource FuturePeriod}"/>
 </ResourceDictionary>

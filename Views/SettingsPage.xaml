@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:YouSpent.Resources.Strings"
+             x:Class="YouSpent.Views.SettingsPage"
+             Shell.PresentationMode="ModalAnimated"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Custom Header with Close Button -->
+        <Grid Grid.Row="0" 
+              Padding="10,10,10,10"
+              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- Close Button (Left side) -->
+            <Border Grid.Column="0"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    HeightRequest="44"
+                    WidthRequest="44"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCloseClicked"/>
+                </Border.GestureRecognizers>
+                
+                <Path Data="M15,6 L9,12 L15,18"
+                      Stroke="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                      StrokeThickness="2.5"
+                      StrokeLineCap="Round"
+                      StrokeLineJoin="Round"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center"
+                      WidthRequest="24"
+                      HeightRequest="24"/>
+            </Border>
+            
+            <!-- Title -->
+            <Label Grid.Column="1"
+                   Text="Settings"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Margin="10,0,44,0" />
+        </Grid>
+        
+        <!-- Content Area with Settings Sections -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,30,20,20" Spacing="30">
+                
+                <!-- Home Settings Section -->
+                <Grid>
+                    <!-- Border frame -->
+                    <Border StrokeThickness="1"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                            BackgroundColor="Transparent"
+                            Margin="0,8,0,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        
+                        <VerticalStackLayout Padding="15,20,15,15" Spacing="10">
+                            <Label Text="Home page settings"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!-- Label on top of border -->
+                    <Label Text="{x:Static resources:AppResources.TabHome}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                           Padding="5,0"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           Margin="20,0,0,0" />
+                </Grid>
+                
+                <!-- Expenses Settings Section -->
+                <Grid>
+                    <!-- Border frame -->
+                    <Border StrokeThickness="1"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                            BackgroundColor="Transparent"
+                            Margin="0,8,0,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        
+                        <VerticalStackLayout Padding="15,20,15,15" Spacing="10">
+                            
+                            <!-- Button for Expense Types -->
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                    HeightRequest="44"
+                                    Margin="0,0,0,0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8"/>
+                                </Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnExpenseTypesClicked"/>
+                                </Border.GestureRecognizers>
+                                
+                                <Label Text="Expense Types"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!-- Label on top of border -->
+                    <Label Text="{x:Static resources:AppResources.TabExpenses}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                           Padding="5,0"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           Margin="20,0,0,0" />
+                </Grid>
+                
+                <!-- Wishlist Settings Section -->
+                <Grid>
+                    <!-- Border frame -->
+                    <Border StrokeThickness="1"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                            BackgroundColor="Transparent"
+                            Margin="0,8,0,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        
+                        <VerticalStackLayout Padding="15,20,15,15" Spacing="10">
+                            <Label Text="Wishlist settings"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!-- Label on top of border -->
+                    <Label Text="{x:Static resources:AppResources.TabWishlist}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                           Padding="5,0"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
+                           Margin="20,0,0,0" />
+                </Grid>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+        
+    </Grid>
+    
+</ContentPage>
